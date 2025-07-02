@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>APM Jewellery - Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-image: url('images/background.png'); /* adjust path if needed */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* === Navbar === */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
+    }
+
+    .logo .name-link {
+      font-size: 2.5rem;
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar .active {
+      color: #000000;
+    }
+
+    /* === Main Project Section === */
+    .project-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+
+    .slider-wrapper {
+      flex: 1 1 600px;
+      position: relative;
+      text-align: center;
+    }
+
+    .slider-wrapper img {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      background-color: #333;
+    }
+
+    .nav-buttons {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .nav-buttons button {
+      padding: 0.5rem 1.2rem;
+      background-color: #3b3b3b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .nav-buttons button:hover {
+      background-color: #575757;
+    }
+
+    .project-info {
+      flex: 1 1 400px;
+      max-width: 500px;
+    }
+
+    .project-info h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-info p {
+      margin: 0.8rem 0;
+      line-height: 1.6;
+    }
+
+    .project-info a {
+      color: #000000;
+      text-decoration: underline;
+    }
+
+    .tags {
+      margin-top: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #3b3b3b;
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      margin: 0.3rem 0.5rem 0 0;
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .project-container {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .slider-wrapper img {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="topbar">
+    <div class="logo">
+      <a href="index.html" class="name-link">Aung Phone Myint</a>
+    </div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html" class="active">Portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Project Content -->
+  <div class="project-container">
+    <div class="slider-wrapper">
+      <img id="mainImage" src="images/apm-jewellery/1.png" alt="APM Jewellery Screenshot" />
+      <div class="nav-buttons">
+        <button onclick="prevImage()"> < </button>
+        <button onclick="nextImage()"> > </button>
+      </div>
+    </div>
+
+    <div class="project-info">
+      <h2>APM Jewellery</h2>
+      <p><strong>Category:</strong> Full Stack E-Commerce Web App</p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/apm_jewellery" target="_blank">link</a></p>
+      <p><strong>Live demo:</strong> <a href="http://jewellery.onlyaungone.com/" target="_blank">link</a></p>
+
+      <p>
+        A premium jewellery e-commerce site developed using React, Firebase, and Stripe.
+        Features include authentication, product filtering, cart system, secure checkout,
+        real-time chat, admin dashboard, and order history.
+      </p>
+
+      <p>
+        Developed for a modern, responsive, and accessible experience across all devices.
+        Data is securely managed with Firestore, and payments handled through Stripe integration.
+      </p>
+
+      <div class="tags">
+        <span class="tag">React</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">Stripe</span>
+        <span class="tag">Firestore</span>
+        <span class="tag">Responsive</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const totalImages = 32;
+    let currentIndex = 1;
+    const imageElement = document.getElementById('mainImage');
+
+    function updateImage() {
+      imageElement.src = `images/apm-jewellery/${currentIndex}.png`;
+    }
+
+    function prevImage() {
+      currentIndex = currentIndex <= 1 ? totalImages : currentIndex - 1;
+      updateImage();
+    }
+
+    function nextImage() {
+      currentIndex = currentIndex >= totalImages ? 1 : currentIndex + 1;
+      updateImage();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VTC App - Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-image: url('images/background.png'); /* adjust path if needed */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #000000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
+    }
+
+    .logo .name-link {
+      font-size: 2.5rem;
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar .active {
+      color: #000000;
+    }
+
+    .project-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      align-items: flex-start;
+      padding: 2rem;
+    }
+
+    .slider-wrapper {
+      flex: 1 1 700px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+    .slider-wrapper img {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      background-color: #333;
+    }
+
+    .nav-buttons {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 1rem;
+      transform: translateY(-50%);
+    }
+
+    .nav-buttons button {
+      background-color: rgba(59, 59, 59, 0.8);
+      color: #fff;
+      font-size: 2rem;
+      border: none;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .nav-buttons button:hover {
+      background-color: rgba(87, 87, 87, 0.9);
+    }
+
+    .project-info {
+      flex: 1 1 400px;
+      max-width: 500px;
+    }
+
+    .project-info h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-info p {
+      margin: 0.8rem 0;
+      line-height: 1.6;
+    }
+
+    .project-info a {
+      color: #000000;
+      text-decoration: underline;
+    }
+
+    .tags {
+      margin-top: 1rem;
+    }
+
+    .tag {
+      display: inline-block;
+      background-color: #3b3b3b;
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      margin: 0.3rem 0.5rem 0 0;
+      font-size: 0.85rem;
+    }
+
+    .media-box {
+      width: 700px;
+      height: 400px;
+      margin: 0 auto;
+      position: relative;
+      background-color: #333;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      overflow: hidden;
+    }
+
+    .media-box video,
+    .media-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 12px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="topbar">
+    <div class="logo">
+      <a href="index.html" class="name-link">Aung Phone Myint</a>
+    </div>
+    <nav class="navbar">
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="skills.html">Skills</a></li>
+        <li><a href="experience.html">Experience</a></li>
+        <li><a href="projects.html" class="active">Portfolio</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Project Content -->
+  <div class="project-container">
+    <div class="slider-wrapper">
+    <!-- Main media display -->
+    <div id="mediaDisplay" class="media-box">
+      <video id="mainVideo" controls>
+        <source src="images/vtc-app/video/vtc-app-workout.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      <img id="mainImage" src="" alt="VTC Screenshot" style="display: none;" />
+    </div>
+
+    <!-- Navigation buttons -->
+    <div class="nav-buttons">
+      <button onclick="prevImage()">&#10094;</button>
+      <button onclick="nextImage()">&#10095;</button>
+    </div>
+  </div>
+
+    <div class="project-info">
+      <h2>Voltage Training Club (VTC App)</h2>
+      <p><strong>Category:</strong> Full Stack Fitness Tracking App</p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/vtc_app" target="_blank">link</a></p>
+
+      <p>
+        VTC is a mobile-first fitness app developed using React Native, Firebase, and AWS.
+        Users can track workouts, log sets and reps, view exercise history, and follow guided training plans.
+        It supports real-time progress tracking, cloud sync, and secure user authentication.
+      </p>
+
+      <p>
+        Features include custom workout creation, start/pause/complete flows, calendar integration,
+        and Firestore-based data storage. Built to be responsive, accessible, and performance-optimized.
+      </p>
+
+      <div class="tags">
+        <span class="tag">React Native</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">AWS</span>
+        <span class="tag">Stripe</span>
+        <span class="tag">Expo Go</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  const totalImages = 15;
+  let currentIndex = 0; // 0 = video, 1...n = images
+
+  const videoElement = document.getElementById('mainVideo');
+  const imageElement = document.getElementById('mainImage');
+
+  function updateMedia() {
+    if (currentIndex === 0) {
+      videoElement.style.display = 'block';
+      imageElement.style.display = 'none';
+    } else {
+      videoElement.style.display = 'none';
+      imageElement.style.display = 'block';
+      imageElement.src = `images/vtc-app/images/${currentIndex}.png`;
+    }
+  }
+
+  function prevImage() {
+    currentIndex = currentIndex <= 0 ? totalImages : currentIndex - 1;
+    updateMedia();
+  }
+
+  function nextImage() {
+    currentIndex = currentIndex >= totalImages ? 0 : currentIndex + 1;
+    updateMedia();
+  }
+
+  // Initial setup
+  updateMedia();
+</script>
+
+</body>
+</html>
