@@ -58,7 +58,8 @@
     .btn:active{transform:translateY(1px)}
     .btn:focus-visible{outline:var(--focus); outline-offset:2px; box-shadow:0 0 0 3px rgba(17,17,17,.15)}
 
-    .counter{font-size:.9rem; opacity:.8}
+    .counter{display:none} /* Hide 1 / 32 counter */
+
     .project-info{max-width:560px}
     .project-info h2{font-size:clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); margin:0 0 1rem}
     .project-info p{margin:.75rem 0}
@@ -102,7 +103,6 @@
         </button>
         <span class="counter" id="counter" aria-live="polite">1 / 32</span>
       </div>
-      <!-- Pagination dots removed as requested -->
     </section>
 
     <section class="project-info">
@@ -136,17 +136,16 @@
 
   <script>
     // ===== Config =====
-    const TOTAL_IMAGES = 32;                 // update if you add/remove screenshots
+    const TOTAL_IMAGES = 32;
     const BASE_PATH = 'images/apm-jewellery/';
     const ALT_BASE = 'APM Jewellery – app screen';
-    const PRELOAD_AHEAD = 2;                 // how many images to preload ahead of current
+    const PRELOAD_AHEAD = 2;
 
     // ===== State =====
     let currentIndex = 1;
 
     // ===== Elements =====
     const imageEl = document.getElementById('mainImage');
-    const counterEl = document.getElementById('counter');
     const stage = document.getElementById('sliderStage');
 
     // Keyboard support
@@ -171,7 +170,7 @@
     function updateImage() {
       const nextSrc = `${BASE_PATH}${currentIndex}.png`;
 
-      // fade swap for nicer UX (respects reduced motion via CSS)
+      // fade swap
       imageEl.style.opacity = 0;
       const temp = new Image();
       temp.onload = () => {
@@ -183,10 +182,7 @@
       temp.loading = 'eager';
       temp.src = nextSrc;
 
-      // update counter
-      counterEl.textContent = `${currentIndex} / ${TOTAL_IMAGES}`;
-
-      // preload next/prev few for smooth nav
+      // preload next/prev few
       for (let i = 1; i <= PRELOAD_AHEAD; i++) {
         const idx = ((currentIndex + i - 1) % TOTAL_IMAGES) + 1;
         const img = new Image();
@@ -203,7 +199,6 @@
 
     function prevImage(){ currentIndex = currentIndex <= 1 ? TOTAL_IMAGES : currentIndex - 1; updateImage(); }
     function nextImage(){ currentIndex = currentIndex >= TOTAL_IMAGES ? 1 : currentIndex + 1; updateImage(); }
-    function goTo(n){ currentIndex = n; updateImage(); }
 
     // Initialize
     updateImage();
