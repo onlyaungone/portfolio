@@ -7,6 +7,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
+    :root{
+      --text:#0b0b0b; --muted:#3b3b3b; --muted-2:#575757; --bg:#ffffff; --chip:#3b3b3b; --focus: 2px solid #222;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body {
       font-family: 'Roboto', sans-serif;
       background-image: url('images/background.png'); /* adjust path if needed */
@@ -16,152 +21,81 @@
       background-position: center;
       color: #000000;
       margin: 0;
-      padding: 0;
     }
 
+    /* Topbar */
     .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      background-color: #ffffff;
+      position: sticky; top: 0; z-index: 10;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1rem 2rem; background-color: #ffffff;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      backdrop-filter: blur(4px);
     }
-
     .logo .name-link {
-      font-size: 2.5rem;
-      color: #000000;
-      text-decoration: none;
-      font-weight: bold;
+      font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+      color: #000000; text-decoration: none; font-weight: bold;
+      letter-spacing:.2px;
     }
+    .navbar ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
+    .navbar a { color: #000000; text-decoration: none; font-weight: 500; }
+    .navbar a:hover, .navbar .active { text-decoration: underline; text-underline-offset: 4px; }
 
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar a {
-      color: #000000;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .navbar a:hover,
-    .navbar .active {
-      color: #000000;
-    }
-
+    /* Layout */
     .project-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 3rem;
-      align-items: flex-start;
-      padding: 2rem;
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(280px, 520px);
+      gap: 3rem; align-items: start; padding: 2rem;
+      max-width: 1200px; margin: 0 auto;
     }
 
-    .slider-wrapper {
-      flex: 1 1 700px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      text-align: center;
-    }
-
-    .slider-wrapper img {
-      width: 100%;
-      max-width: 700px;
-      height: 400px;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      background-color: #333;
-    }
-
-    .nav-buttons {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      display: flex;
-      justify-content: space-between;
-      padding: 0 1rem;
-      transform: translateY(-50%);
-    }
-
-    .nav-buttons button {
-      background-color: rgba(59, 59, 59, 0.8);
-      color: #fff;
-      font-size: 2rem;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    .nav-buttons button:hover {
-      background-color: rgba(87, 87, 87, 0.9);
-    }
-
-    .project-info {
-      flex: 1 1 400px;
-      max-width: 500px;
-    }
-
-    .project-info h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
-
-    .project-info p {
-      margin: 0.8rem 0;
-      line-height: 1.6;
-    }
-
-    .project-info a {
-      color: #000000;
-      text-decoration: underline;
-    }
-
-    .tags {
-      margin-top: 1rem;
-    }
-
-    .tag {
-      display: inline-block;
-      background-color: #3b3b3b;
-      color: #fff;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      margin: 0.3rem 0.5rem 0 0;
-      font-size: 0.85rem;
-    }
-
+    /* Media box */
+    .slider-wrapper { position: relative; text-align: center; }
     .media-box {
-      width: 700px;
-      height: 400px;
-      margin: 0 auto;
-      position: relative;
-      background-color: #333;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      overflow: hidden;
+      width: 100%; aspect-ratio: 7 / 4; max-width: 700px; margin: 0 auto;
+      position: relative; background-color: #333; border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4); overflow: hidden;
+    }
+    .media-box video, .media-box img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: contain; border-radius: 12px;
+      transition: opacity .25s ease;
+    }
+    .hidden { opacity: 0; pointer-events: none; }
+    .visible { opacity: 1; }
+
+    /* Buttons (same style as APM page) */
+    .nav-buttons {
+      margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .nav-buttons button {
+      padding: 0.5rem 1.2rem; background-color: #3b3b3b; color: #fff;
+      border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+    }
+    .nav-buttons button:hover { background-color: #575757; }
+    .nav-buttons button:focus-visible { outline: var(--focus); outline-offset: 2px; }
+    .counter { font-size: .9rem; opacity:.85; align-self:center; }
+
+    /* Dots pagination */
+    .dots { display:flex; gap:.4rem; justify-content:center; margin-top:.5rem; flex-wrap: wrap; }
+    .dot { width:8px; height:8px; border-radius:999px; background:#bbb; opacity:.6; border:0; }
+    .dot[aria-current="true"] { opacity:1; background:#fff; box-shadow:0 0 0 2px #111 inset; }
+
+    /* Info */
+    .project-info { max-width: 560px; }
+    .project-info h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); margin: 0 0 1rem; }
+    .project-info p { margin: .75rem 0; line-height: 1.65; }
+    .project-info a { color: #000000; text-decoration: underline; }
+    .tags { margin-top: 1rem; }
+    .tag {
+      display: inline-block; background-color: #3b3b3b; color: #fff;
+      padding: 0.4rem 1rem; border-radius: 20px; margin: 0.3rem 0.5rem 0 0; font-size: 0.85rem;
     }
 
-    .media-box video,
-    .media-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 12px;
+    @media (max-width: 980px) {
+      .project-container { grid-template-columns: 1fr; gap: 1.75rem; padding: 1rem; }
     }
 
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   </style>
 </head>
 <body>
@@ -171,39 +105,41 @@
     <div class="logo">
       <a href="index.html" class="name-link">Aung Phone Myint</a>
     </div>
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="experience.html">Experience</a></li>
-        <li><a href="projects.html" class="active">Portfolio</a></li>
+        <li><a href="projects.html" class="active" aria-current="page">Portfolio</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Project Content -->
   <div class="project-container">
-    <div class="slider-wrapper">
-    <!-- Main media display -->
-    <div id="mediaDisplay" class="media-box">
-      <video id="mainVideo" controls>
-        <source src="images/vtc-app/video/vtc-app-workout.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      <img id="mainImage" src="" alt="VTC Screenshot" style="display: none;" />
-    </div>
+    <section class="slider-wrapper" aria-labelledby="proj-title">
+      <!-- Main media display -->
+      <div id="mediaDisplay" class="media-box">
+        <video id="mainVideo" class="visible" controls preload="metadata">
+          <source src="images/vtc-app/video/vtc-app-workout.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <img id="mainImage" class="hidden" src="" alt="VTC App screen 1" decoding="async" />
+      </div>
 
-    <!-- Navigation buttons -->
-    <div class="nav-buttons">
-      <button onclick="prevImage()">&#10094;</button>
-      <button onclick="nextImage()">&#10095;</button>
-    </div>
-  </div>
+      <!-- Controls -->
+      <div class="nav-buttons">
+        <button id="prevBtn" type="button" aria-label="Previous (Left Arrow)">◀</button>
+        <button id="nextBtn" type="button" aria-label="Next (Right Arrow)">▶</button>
+        <span id="counter" class="counter" aria-live="polite">1 / 16</span>
+      </div>
+      <div id="dots" class="dots" aria-label="Slide pagination"></div>
+    </section>
 
-    <div class="project-info">
-      <h2>Voltage Training Club (VTC App)</h2>
+    <section class="project-info">
+      <h2 id="proj-title">Voltage Training Club (VTC App)</h2>
       <p><strong>Category:</strong> Full Stack Fitness Tracking App</p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/vtc_app" target="_blank">link</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/vtc_app" target="_blank" rel="noopener">link</a></p>
 
       <p>
         VTC is a mobile-first fitness app developed using React Native, Firebase, and AWS.
@@ -216,47 +152,125 @@
         and Firestore-based data storage. Built to be responsive, accessible, and performance-optimized.
       </p>
 
-      <div class="tags">
+      <div class="tags" aria-label="Tech stack tags">
         <span class="tag">React Native</span>
         <span class="tag">TypeScript</span>
         <span class="tag">AWS</span>
         <span class="tag">Stripe</span>
         <span class="tag">Expo Go</span>
       </div>
-    </div>
+    </section>
   </div>
 
+  <noscript>
+    <p style="padding:1rem 2rem">This page displays a project gallery that requires JavaScript to navigate media.</p>
+  </noscript>
+
   <script>
-  const totalImages = 15;
-  let currentIndex = 0; // 0 = video, 1...n = images
+    // ===== Config =====
+    const totalImages = 15;            // images count (1..15)
+    const totalItems  = totalImages + 1; // including video at index 0
+    const basePath = 'images/vtc-app/images/';
+    const imageAltBase = 'VTC App screen';
+    const preloadAhead = 2;
 
-  const videoElement = document.getElementById('mainVideo');
-  const imageElement = document.getElementById('mainImage');
+    // ===== State & Elements =====
+    let currentIndex = 0; // 0 = video, 1..n = images
+    const videoElement = document.getElementById('mainVideo');
+    const imageElement = document.getElementById('mainImage');
+    const counter = document.getElementById('counter');
+    const dotsContainer = document.getElementById('dots');
+    const mediaDisplay = document.getElementById('mediaDisplay');
 
-  function updateMedia() {
-    if (currentIndex === 0) {
-      videoElement.style.display = 'block';
-      imageElement.style.display = 'none';
-    } else {
-      videoElement.style.display = 'none';
-      imageElement.style.display = 'block';
-      imageElement.src = `images/vtc-app/images/${currentIndex}.png`;
+    // Build dots (index 0 for video + images 1..n)
+    for (let i = 0; i < totalItems; i++) {
+      const b = document.createElement('button');
+      b.className = 'dot';
+      b.type = 'button';
+      b.setAttribute('aria-label', i === 0 ? 'Go to video' : `Go to image ${i}`);
+      b.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(b);
     }
-  }
 
-  function prevImage() {
-    currentIndex = currentIndex <= 0 ? totalImages : currentIndex - 1;
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prev();
+      if (e.key === 'ArrowRight') next();
+    });
+
+    // Swipe support
+    let startX = null;
+    mediaDisplay.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, {passive:true});
+    mediaDisplay.addEventListener('touchend', (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) { dx > 0 ? prev() : next(); }
+      startX = null;
+    });
+
+    // Buttons
+    document.getElementById('prevBtn').addEventListener('click', prev);
+    document.getElementById('nextBtn').addEventListener('click', next);
+
+    function updateMedia() {
+      // fade-out both, then show the target
+      videoElement.className = 'hidden';
+      imageElement.className = 'hidden';
+
+      if (currentIndex === 0) {
+        // Show video
+        videoElement.className = 'visible';
+        // Pause any playing when leaving and reset when returning as you like
+      } else {
+        const nextSrc = `${basePath}${currentIndex}.png`;
+        const temp = new Image();
+        temp.onload = () => {
+          imageElement.src = nextSrc;
+          imageElement.alt = `${imageAltBase} ${currentIndex}`;
+          imageElement.className = 'visible';
+        };
+        temp.src = nextSrc;
+
+        // Pause the video when switching to images
+        if (!videoElement.paused) videoElement.pause();
+      }
+
+      // Update counter (human-friendly: 1..totalItems)
+      counter.textContent = `${currentIndex + 1} / ${totalItems}`;
+
+      // Update dots
+      [...dotsContainer.children].forEach((d, i) =>
+        d.setAttribute('aria-current', (i === currentIndex).toString())
+      );
+
+      // Preload ahead (images only)
+      if (currentIndex !== 0) {
+        for (let i = 1; i <= preloadAhead; i++) {
+          const idx = ((currentIndex + i) > totalImages) ? ((currentIndex + i) % (totalImages + 1)) : (currentIndex + i);
+          if (idx > 0) {
+            const img = new Image(); img.decoding = 'async'; img.loading = 'lazy';
+            img.src = `${basePath}${idx}.png`;
+          }
+        }
+        const prevIdx = currentIndex - 1 <= 0 ? totalImages : currentIndex - 1;
+        const imgPrev = new Image(); imgPrev.decoding = 'async'; imgPrev.loading = 'lazy';
+        imgPrev.src = `${basePath}${prevIdx}.png`;
+      }
+    }
+
+    function prev() {
+      currentIndex = currentIndex <= 0 ? totalImages : currentIndex - 1;
+      updateMedia();
+    }
+    function next() {
+      currentIndex = currentIndex >= totalImages ? 0 : currentIndex + 1;
+      updateMedia();
+    }
+    function goTo(n){ currentIndex = n; updateMedia(); }
+
+    // Init
     updateMedia();
-  }
-
-  function nextImage() {
-    currentIndex = currentIndex >= totalImages ? 0 : currentIndex + 1;
-    updateMedia();
-  }
-
-  // Initial setup
-  updateMedia();
-</script>
+  </script>
 
 </body>
 </html>
