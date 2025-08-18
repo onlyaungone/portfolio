@@ -4,157 +4,109 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>APM Jewellery - Project</title>
+  <meta name="description" content="APM Jewellery – a full‑stack e‑commerce web app built with React, Firebase and Stripe. Features gallery slider, responsive layout and accessible controls." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Styles -->
   <style>
+    :root{
+      --text:#0b0b0b; --muted:#3b3b3b; --muted-2:#575757; --bg:#ffffff; --chip:#3b3b3b; --focus: 2px solid #222;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Roboto', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
       background-image: url('images/background.png'); /* adjust path if needed */
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
       background-position: center;
-      color: #000000;
+      color: var(--text);
       margin: 0;
-      padding: 0;
     }
 
     /* === Navbar === */
     .topbar {
+      position: sticky; top: 0; z-index: 10;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background-color: #ffffff;
+      background-color: var(--bg);
+      border-bottom: 1px solid rgba(0,0,0,.06);
+      backdrop-filter: blur(4px);
     }
 
     .logo .name-link {
-      font-size: 2.5rem;
-      color: #000000;
+      font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
+      color: var(--text);
       text-decoration: none;
-      font-weight: bold;
+      font-weight: 700;
+      letter-spacing: .3px;
     }
 
-    .navbar ul {
-      list-style: none;
-      display: flex;
-      gap: 1.5rem;
-      margin: 0;
-      padding: 0;
-    }
-
-    .navbar a {
-      color: #000000;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .navbar a:hover,
-    .navbar .active {
-      color: #000000;
-    }
+    .navbar ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
+    .navbar a { color: var(--text); text-decoration: none; font-weight: 500; }
+    .navbar a:hover, .navbar .active { text-decoration: underline; text-underline-offset: 4px; }
 
     /* === Main Project Section === */
     .project-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(280px, 520px);
       gap: 3rem;
-      align-items: flex-start;
-      padding: 2rem;
+      align-items: start;
+      padding: 2rem; max-width: 1200px; margin: 0 auto;
     }
 
-    .slider-wrapper {
-      flex: 1 1 600px;
-      position: relative;
-      text-align: center;
+    .slider-wrapper { position: relative; }
+
+    .slider-stage {
+      position: relative; width: 100%; aspect-ratio: 7/4; /* consistent height */
+      border-radius: 12px; overflow: hidden; background:#111;
+      box-shadow: 0 8px 24px rgba(0,0,0,.25);
     }
 
-    .slider-wrapper img {
-      width: 100%;
-      max-width: 700px;
-      height: 400px;
-      object-fit: contain;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4);
-      background-color: #333;
+    .slider-stage img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: contain; background: #111;
+      transition: opacity .25s ease;
     }
+
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
     .nav-buttons {
-      margin-top: 1rem;
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
+      margin-top: .75rem; display: flex; justify-content: center; gap: .75rem; flex-wrap: wrap;
     }
 
-    .nav-buttons button {
-      padding: 0.5rem 1.2rem;
-      background-color: #3b3b3b;
-      color: #fff;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background 0.2s ease;
+    .btn {
+      padding: .6rem 1.1rem; background-color: var(--muted); color: #fff; border: none; border-radius: 8px;
+      cursor: pointer; transition: transform .08s ease, background .2s ease; display: inline-flex; align-items: center; gap: .5rem;
     }
+    .btn:hover { background-color: var(--muted-2); }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: var(--focus); outline-offset: 2px; }
 
-    .nav-buttons button:hover {
-      background-color: #575757;
-    }
+    .counter { font-size: .9rem; opacity:.8; }
 
-    .project-info {
-      flex: 1 1 400px;
-      max-width: 500px;
-    }
+    .project-info { max-width: 560px; }
+    .project-info h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); margin: 0 0 1rem; }
+    .project-info p { margin: .75rem 0; line-height: 1.65; }
+    .project-info a { color: var(--text); text-decoration: underline; }
 
-    .project-info h2 {
-      font-size: 2.2rem;
-      margin-bottom: 1rem;
-    }
+    .tags { margin-top: 1rem; }
+    .tag { display: inline-block; background-color: var(--chip); color: #fff; padding: .4rem 1rem; border-radius: 999px; margin: .35rem .5rem 0 0; font-size: .85rem; }
 
-    .project-info p {
-      margin: 0.8rem 0;
-      line-height: 1.6;
-    }
+    /* Dots pagination */
+    .dots { display:flex; gap:.4rem; justify-content:center; margin-top:.5rem; }
+    .dot { width:8px; height:8px; border-radius:999px; background:#bbb; opacity:.55; border:0; }
+    .dot[aria-current="true"] { opacity:1; background:#fff; box-shadow:0 0 0 2px #111 inset; }
 
-    .project-info a {
-      color: #000000;
-      text-decoration: underline;
-    }
-
-    .tags {
-      margin-top: 1rem;
-    }
-
-    .tag {
-      display: inline-block;
-      background-color: #3b3b3b;
-      color: #fff;
-      padding: 0.4rem 1rem;
-      border-radius: 20px;
-      margin: 0.3rem 0.5rem 0 0;
-      font-size: 0.85rem;
-    }
-
-    @media (max-width: 768px) {
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .navbar ul {
-        flex-wrap: wrap;
-        gap: 1rem;
-      }
-
-      .project-container {
-        flex-direction: column;
-        padding: 1rem;
-      }
-
-      .slider-wrapper img {
-        width: 100%;
-      }
+    @media (max-width: 980px) {
+      .project-container { grid-template-columns: 1fr; gap: 1.75rem; padding: 1rem; }
     }
   </style>
 </head>
@@ -165,31 +117,40 @@
     <div class="logo">
       <a href="index.html" class="name-link">Aung Phone Myint</a>
     </div>
-    <nav class="navbar">
+    <nav class="navbar" aria-label="Primary">
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="skills.html">Skills</a></li>
         <li><a href="experience.html">Experience</a></li>
-        <li><a href="projects.html" class="active">Portfolio</a></li>
+        <li><a href="projects.html" class="active" aria-current="page">Portfolio</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Project Content -->
-  <div class="project-container">
-    <div class="slider-wrapper">
-      <img id="mainImage" src="images/apm-jewellery/1.png" alt="APM Jewellery Screenshot" />
-      <div class="nav-buttons">
-        <button onclick="prevImage()"> < </button>
-        <button onclick="nextImage()"> > </button>
+  <main class="project-container">
+    <section class="slider-wrapper" aria-labelledby="proj-title">
+      <div class="slider-stage" id="sliderStage">
+        <!-- The main image swaps in place; use lazy + decoding for perf -->
+        <img id="mainImage" src="images/apm-jewellery/1.png" alt="APM Jewellery – app screen 1" loading="eager" decoding="async" />
       </div>
-    </div>
+      <div class="nav-buttons">
+        <button class="btn" id="prevBtn" type="button" aria-label="Previous image (Left Arrow)">
+          <span aria-hidden="true">◀</span><span class="sr-only">Previous</span>
+        </button>
+        <button class="btn" id="nextBtn" type="button" aria-label="Next image (Right Arrow)">
+          <span aria-hidden="true">▶</span><span class="sr-only">Next</span>
+        </button>
+        <span class="counter" id="counter" aria-live="polite">1 / 32</span>
+      </div>
+      <div class="dots" id="dots" aria-label="Slide pagination"></div>
+    </section>
 
-    <div class="project-info">
-      <h2>APM Jewellery</h2>
+    <section class="project-info">
+      <h2 id="proj-title">APM Jewellery</h2>
       <p><strong>Category:</strong> Full Stack E-Commerce Web App</p>
-      <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/apm_jewellery" target="_blank">link</a></p>
-      <p><strong>Live demo:</strong> <a href="http://jewellery.onlyaungone.com/" target="_blank">link</a></p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/apm_jewellery" target="_blank" rel="noopener">link</a></p>
+      <p><strong>Live demo:</strong> <a href="http://jewellery.onlyaungone.com/" target="_blank" rel="noopener">link</a></p>
 
       <p>
         A premium jewellery e-commerce site developed using React, Firebase, and Stripe.
@@ -202,35 +163,104 @@
         Data is securely managed with Firestore, and payments handled through Stripe integration.
       </p>
 
-      <div class="tags">
+      <div class="tags" aria-label="Tech stack tags">
         <span class="tag">React</span>
         <span class="tag">Firebase</span>
         <span class="tag">Stripe</span>
         <span class="tag">Firestore</span>
         <span class="tag">Responsive</span>
       </div>
-    </div>
-  </div>
+    </section>
+  </main>
+
+  <noscript>
+    <p style="padding:1rem 2rem">This page displays a project gallery that requires JavaScript to navigate images.</p>
+  </noscript>
 
   <script>
-    const totalImages = 32;
+    // ===== Config =====
+    const totalImages = 32;           // change if you add/remove screenshots
+    const basePath = 'images/apm-jewellery/';
+    const imageAltBase = 'APM Jewellery – app screen';
+    const preloadAhead = 2;           // how many images to preload ahead of current
+
+    // ===== State =====
     let currentIndex = 1;
+
+    // ===== Elements =====
     const imageElement = document.getElementById('mainImage');
+    const counter = document.getElementById('counter');
+    const dotsContainer = document.getElementById('dots');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const sliderStage = document.getElementById('sliderStage');
+
+    // Create dots
+    for (let i = 1; i <= totalImages; i++) {
+      const b = document.createElement('button');
+      b.className = 'dot';
+      b.type = 'button';
+      b.setAttribute('aria-label', `Go to image ${i}`);
+      b.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(b);
+    }
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    });
+
+    // Touch/Swipe support
+    let startX = null;
+    sliderStage.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, {passive:true});
+    sliderStage.addEventListener('touchend', (e) => {
+      if (startX === null) return;
+      const dx = e.changedTouches[0].clientX - startX;
+      if (Math.abs(dx) > 40) { dx > 0 ? prevImage() : nextImage(); }
+      startX = null;
+    });
+
+    prevBtn.addEventListener('click', prevImage);
+    nextBtn.addEventListener('click', nextImage);
 
     function updateImage() {
-      imageElement.src = `images/apm-jewellery/${currentIndex}.png`;
+      const nextSrc = `${basePath}${currentIndex}.png`;
+      // fade swap for nicer UX
+      imageElement.style.opacity = 0;
+      const temp = new Image();
+      temp.onload = () => {
+        imageElement.src = nextSrc;
+        imageElement.alt = `${imageAltBase} ${currentIndex}`;
+        requestAnimationFrame(() => { imageElement.style.opacity = 1; });
+      };
+      temp.src = nextSrc;
+
+      // update counter & dots
+      counter.textContent = `${currentIndex} / ${totalImages}`;
+      [...dotsContainer.children].forEach((d, i) => d.setAttribute('aria-current', (i+1===currentIndex).toString()));
+
+      // preload next few
+      for (let i = 1; i <= preloadAhead; i++) {
+        const idx = ((currentIndex + i - 1) % totalImages) + 1;
+        const img = new Image(); img.decoding = 'async'; img.loading = 'lazy'; img.src = `${basePath}${idx}.png`;
+      }
+      const prevIdx = currentIndex - 1 > 0 ? currentIndex - 1 : totalImages;
+      const imgPrev = new Image(); imgPrev.decoding = 'async'; imgPrev.loading = 'lazy'; imgPrev.src = `${basePath}${prevIdx}.png`;
     }
 
     function prevImage() {
       currentIndex = currentIndex <= 1 ? totalImages : currentIndex - 1;
       updateImage();
     }
-
     function nextImage() {
       currentIndex = currentIndex >= totalImages ? 1 : currentIndex + 1;
       updateImage();
     }
-  </script>
+    function goTo(n){ currentIndex = n; updateImage(); }
 
+    // Initialize
+    updateImage();
+  </script>
 </body>
 </html>
