@@ -14,13 +14,9 @@
     html,body{height:100%}
     body {
       font-family: 'Roboto', sans-serif;
-      background-image: url('images/background.png'); /* adjust path if needed */
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
-      color: #000000;
-      margin: 0;
+      background-image: url('images/background.png');
+      background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;
+      color: #000000; margin: 0;
     }
 
     /* Topbar */
@@ -63,7 +59,7 @@
     .hidden { opacity: 0; pointer-events: none; }
     .visible { opacity: 1; }
 
-    /* Buttons (same style as APM page) */
+    /* Buttons */
     .nav-buttons {
       margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
     }
@@ -73,12 +69,6 @@
     }
     .nav-buttons button:hover { background-color: #575757; }
     .nav-buttons button:focus-visible { outline: var(--focus); outline-offset: 2px; }
-    .counter { font-size: .9rem; opacity:.85; align-self:center; }
-
-    /* Dots pagination */
-    .dots { display:flex; gap:.4rem; justify-content:center; margin-top:.5rem; flex-wrap: wrap; }
-    .dot { width:8px; height:8px; border-radius:999px; background:#bbb; opacity:.6; border:0; }
-    .dot[aria-current="true"] { opacity:1; background:#fff; box-shadow:0 0 0 2px #111 inset; }
 
     /* Info */
     .project-info { max-width: 560px; }
@@ -119,7 +109,7 @@
   <div class="project-container">
     <section class="slider-wrapper" aria-labelledby="proj-title">
       <!-- Main media display -->
-      <div id="mediaDisplay" class="media-box">
+      <div id="mediaDisplay" class="media-box" aria-live="polite" aria-label="VTC App media">
         <video id="mainVideo" class="visible" controls preload="metadata">
           <source src="images/vtc-app/video/vtc-app-workout.mp4" type="video/mp4" />
           Your browser does not support the video tag.
@@ -131,9 +121,8 @@
       <div class="nav-buttons">
         <button id="prevBtn" type="button" aria-label="Previous (Left Arrow)">◀</button>
         <button id="nextBtn" type="button" aria-label="Next (Right Arrow)">▶</button>
-        <span id="counter" class="counter" aria-live="polite">1 / 16</span>
       </div>
-      <div id="dots" class="dots" aria-label="Slide pagination"></div>
+      <!-- Counter and dots removed -->
     </section>
 
     <section class="project-info">
@@ -168,8 +157,7 @@
 
   <script>
     // ===== Config =====
-    const totalImages = 15;            // images count (1..15)
-    const totalItems  = totalImages + 1; // including video at index 0
+    const totalImages = 15;               // images count (1..15)
     const basePath = 'images/vtc-app/images/';
     const imageAltBase = 'VTC App screen';
     const preloadAhead = 2;
@@ -178,19 +166,7 @@
     let currentIndex = 0; // 0 = video, 1..n = images
     const videoElement = document.getElementById('mainVideo');
     const imageElement = document.getElementById('mainImage');
-    const counter = document.getElementById('counter');
-    const dotsContainer = document.getElementById('dots');
     const mediaDisplay = document.getElementById('mediaDisplay');
-
-    // Build dots (index 0 for video + images 1..n)
-    for (let i = 0; i < totalItems; i++) {
-      const b = document.createElement('button');
-      b.className = 'dot';
-      b.type = 'button';
-      b.setAttribute('aria-label', i === 0 ? 'Go to video' : `Go to image ${i}`);
-      b.addEventListener('click', () => goTo(i));
-      dotsContainer.appendChild(b);
-    }
 
     // Keyboard support
     window.addEventListener('keydown', (e) => {
@@ -220,7 +196,6 @@
       if (currentIndex === 0) {
         // Show video
         videoElement.className = 'visible';
-        // Pause any playing when leaving and reset when returning as you like
       } else {
         const nextSrc = `${basePath}${currentIndex}.png`;
         const temp = new Image();
@@ -235,22 +210,12 @@
         if (!videoElement.paused) videoElement.pause();
       }
 
-      // Update counter (human-friendly: 1..totalItems)
-      counter.textContent = `${currentIndex + 1} / ${totalItems}`;
-
-      // Update dots
-      [...dotsContainer.children].forEach((d, i) =>
-        d.setAttribute('aria-current', (i === currentIndex).toString())
-      );
-
       // Preload ahead (images only)
       if (currentIndex !== 0) {
         for (let i = 1; i <= preloadAhead; i++) {
-          const idx = ((currentIndex + i) > totalImages) ? ((currentIndex + i) % (totalImages + 1)) : (currentIndex + i);
-          if (idx > 0) {
-            const img = new Image(); img.decoding = 'async'; img.loading = 'lazy';
-            img.src = `${basePath}${idx}.png`;
-          }
+          const idx = currentIndex + i > totalImages ? ((currentIndex + i - 1) % totalImages) + 1 : currentIndex + i;
+          const img = new Image(); img.decoding = 'async'; img.loading = 'lazy';
+          img.src = `${basePath}${idx}.png`;
         }
         const prevIdx = currentIndex - 1 <= 0 ? totalImages : currentIndex - 1;
         const imgPrev = new Image(); imgPrev.decoding = 'async'; imgPrev.loading = 'lazy';
@@ -266,7 +231,7 @@
       currentIndex = currentIndex >= totalImages ? 0 : currentIndex + 1;
       updateMedia();
     }
-    function goTo(n){ currentIndex = n; updateMedia(); }
+    function goTo(n){ currentIndex = n; updateMedia(); } // retained if you add thumbnails later
 
     // Init
     updateMedia();
