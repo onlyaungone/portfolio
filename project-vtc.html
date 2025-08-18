@@ -7,96 +7,160 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <style>
-    :root{
-      --text:#0b0b0b; --muted:#3b3b3b; --muted-2:#575757; --bg:#ffffff; --chip:#3b3b3b; --focus: 2px solid #222;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
     body {
       font-family: 'Roboto', sans-serif;
-      background-image: url('images/background.png');
-      background-size: cover; background-repeat: no-repeat; background-attachment: fixed; background-position: center;
-      color: #000000; margin: 0;
+      background-image: url('images/background.png'); /* adjust path if needed */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #000000;
+      margin: 0;
+      padding: 0;
     }
 
-    /* Topbar */
+    /* === Navbar === */
     .topbar {
-      position: sticky; top: 0; z-index: 10;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1rem 2rem; background-color: #ffffff;
-      border-bottom: 1px solid rgba(0,0,0,.06);
-      backdrop-filter: blur(4px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
     }
+
     .logo .name-link {
-      font-size: clamp(1.5rem, 2vw + 1rem, 2.5rem);
-      color: #000000; text-decoration: none; font-weight: bold;
-      letter-spacing:.2px;
+      font-size: 2.5rem;
+      color: #000000;
+      text-decoration: none;
+      font-weight: bold;
     }
-    .navbar ul { list-style: none; display: flex; gap: 1.5rem; margin: 0; padding: 0; }
-    .navbar a { color: #000000; text-decoration: none; font-weight: 500; }
-    .navbar a:hover, .navbar .active { text-decoration: underline; text-underline-offset: 4px; }
 
-    /* Layout */
+    .navbar ul {
+      list-style: none;
+      display: flex;
+      gap: 1.5rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar a {
+      color: #000000;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .navbar a:hover,
+    .navbar .active {
+      color: #000000;
+    }
+
+    /* === Main Project Section === */
     .project-container {
-      display: grid;
-      grid-template-columns: minmax(280px, 1fr) minmax(280px, 520px);
-      gap: 3rem; align-items: start; padding: 2rem;
-      max-width: 1200px; margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      align-items: flex-start;
+      padding: 2rem;
     }
 
-    /* Media box */
-    .slider-wrapper { position: relative; text-align: center; }
-    .media-box {
-      width: 100%; aspect-ratio: 7 / 4; max-width: 700px; margin: 0 auto;
-      position: relative; background-color: #333; border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.4); overflow: hidden;
+    .slider-wrapper {
+      flex: 1 1 600px;
+      position: relative;
+      text-align: center;
     }
-    .media-box video, .media-box img {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: contain; border-radius: 12px;
-      transition: opacity .25s ease;
-    }
-    .hidden { opacity: 0; pointer-events: none; }
-    .visible { opacity: 1; }
 
-    /* Buttons */
+    .slider-wrapper img {
+      width: 100%;
+      max-width: 700px;
+      height: 400px;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.4);
+      background-color: #333;
+    }
+
     .nav-buttons {
-      margin-top: 1rem; display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
+      margin-top: 1rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
     }
+
     .nav-buttons button {
-      padding: 0.5rem 1.2rem; background-color: #3b3b3b; color: #fff;
-      border: none; border-radius: 6px; cursor: pointer; transition: background 0.2s ease;
+      padding: 0.5rem 1.2rem;
+      background-color: #3b3b3b;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s ease;
     }
-    .nav-buttons button:hover { background-color: #575757; }
-    .nav-buttons button:focus-visible { outline: var(--focus); outline-offset: 2px; }
 
-    /* Info */
-    .project-info { max-width: 560px; }
-    .project-info h2 { font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem); margin: 0 0 1rem; }
-    .project-info p { margin: .75rem 0; line-height: 1.65; }
-    .project-info a { color: #000000; text-decoration: underline; }
-    .tags { margin-top: 1rem; }
+    .nav-buttons button:hover {
+      background-color: #575757;
+    }
+
+    .project-info {
+      flex: 1 1 400px;
+      max-width: 500px;
+    }
+
+    .project-info h2 {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-info p {
+      margin: 0.8rem 0;
+      line-height: 1.6;
+    }
+
+    .project-info a {
+      color: #000000;
+      text-decoration: underline;
+    }
+
+    .tags {
+      margin-top: 1rem;
+    }
+
     .tag {
-      display: inline-block; background-color: #3b3b3b; color: #fff;
-      padding: 0.4rem 1rem; border-radius: 20px; margin: 0.3rem 0.5rem 0 0; font-size: 0.85rem;
+      display: inline-block;
+      background-color: #3b3b3b;
+      color: #fff;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      margin: 0.3rem 0.5rem 0 0;
+      font-size: 0.85rem;
     }
 
-    @media (max-width: 980px) {
-      .project-container { grid-template-columns: 1fr; gap: 1.75rem; padding: 1rem; }
-    }
+    @media (max-width: 768px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+      .navbar ul {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .project-container {
+        flex-direction: column;
+        padding: 1rem;
+      }
+
+      .slider-wrapper img {
+        width: 100%;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Carattere&family=Imperial+Script&display=swap" rel="stylesheet">
-
-  <!-- Styles -->
-  <link rel="stylesheet" href="styles.css" />
-</head>
-  <!-- Top Bar -->
+  <!-- Navbar -->
   <header class="topbar">
     <div class="logo">
       <a href="index.html" class="name-link">Aung Phone Myint</a>
@@ -104,143 +168,69 @@
     <nav class="navbar">
       <ul>
         <li><a href="about.html">About</a></li>
-        <li><a href="skills.html" class="active">Skills</a></li>
+        <li><a href="skills.html">Skills</a></li>
         <li><a href="experience.html">Experience</a></li>
-        <li><a href="projects.html">Portfolio</a></li>
+        <li><a href="projects.html" class="active">Portfolio</a></li>
       </ul>
     </nav>
   </header>
 
   <!-- Project Content -->
   <div class="project-container">
-    <section class="slider-wrapper" aria-labelledby="proj-title">
-      <!-- Main media display -->
-      <div id="mediaDisplay" class="media-box" aria-live="polite" aria-label="VTC App media">
-        <video id="mainVideo" class="visible" controls preload="metadata">
-          <source src="images/vtc-app/video/vtc-app-workout.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <img id="mainImage" class="hidden" src="" alt="VTC App screen 1" decoding="async" />
-      </div>
-
-      <!-- Controls -->
+    <div class="slider-wrapper">
+      <!-- Match APM style: single <img> with Prev/Next -->
+      <img id="mainImage" src="images/vtc-app/images/1.png" alt="Voltage Training Club screenshot" />
       <div class="nav-buttons">
-        <button id="prevBtn" type="button" aria-label="Previous (Left Arrow)">◀</button>
-        <button id="nextBtn" type="button" aria-label="Next (Right Arrow)">▶</button>
+        <button onclick="prevImage()"> &lt; </button>
+        <button onclick="nextImage()"> &gt; </button>
       </div>
-      <!-- Counter and dots removed -->
-    </section>
+    </div>
 
-    <section class="project-info">
-      <h2 id="proj-title">Voltage Training Club (VTC App)</h2>
+    <div class="project-info">
+      <h2>Voltage Training Club (VTC App)</h2>
       <p><strong>Category:</strong> Full Stack Fitness Tracking App</p>
       <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/vtc_app" target="_blank" rel="noopener">link</a></p>
 
       <p>
-        VTC is a mobile-first fitness app developed using React Native, Firebase, and AWS.
-        Users can track workouts, log sets and reps, view exercise history, and follow guided training plans.
-        It supports real-time progress tracking, cloud sync, and secure user authentication.
+        A mobile-first fitness application built with React Native, Firebase, and AWS.
+        Users can track workouts, log sets & reps, view exercise history, and follow training plans.
+        The app supports real-time progress tracking, cloud sync, and secure authentication.
       </p>
 
       <p>
-        Features include custom workout creation, start/pause/complete flows, calendar integration,
-        and Firestore-based data storage. Built to be responsive, accessible, and performance-optimized.
+        Developed for a modern, responsive experience across devices. Data is securely managed with Firestore.
+        (Demo video available in repository.)
       </p>
 
-      <div class="tags" aria-label="Tech stack tags">
+      <div class="tags">
         <span class="tag">React Native</span>
         <span class="tag">TypeScript</span>
         <span class="tag">AWS</span>
-        <span class="tag">Stripe</span>
-        <span class="tag">Expo Go</span>
+        <span class="tag">Firebase</span>
+        <span class="tag">Expo</span>
       </div>
-    </section>
+    </div>
   </div>
 
-  <noscript>
-    <p style="padding:1rem 2rem">This page displays a project gallery that requires JavaScript to navigate media.</p>
-  </noscript>
-
   <script>
-    // ===== Config =====
-    const totalImages = 15;               // images count (1..15)
-    const basePath = 'images/vtc-app/images/';
-    const imageAltBase = 'VTC App screen';
-    const preloadAhead = 2;
-
-    // ===== State & Elements =====
-    let currentIndex = 0; // 0 = video, 1..n = images
-    const videoElement = document.getElementById('mainVideo');
+    // Mirror the simple APM slider behavior
+    const totalImages = 15; // adjust to your image count
+    let currentIndex = 1;
     const imageElement = document.getElementById('mainImage');
-    const mediaDisplay = document.getElementById('mediaDisplay');
 
-    // Keyboard support
-    window.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') prev();
-      if (e.key === 'ArrowRight') next();
-    });
-
-    // Swipe support
-    let startX = null;
-    mediaDisplay.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, {passive:true});
-    mediaDisplay.addEventListener('touchend', (e) => {
-      if (startX === null) return;
-      const dx = e.changedTouches[0].clientX - startX;
-      if (Math.abs(dx) > 40) { dx > 0 ? prev() : next(); }
-      startX = null;
-    });
-
-    // Buttons
-    document.getElementById('prevBtn').addEventListener('click', prev);
-    document.getElementById('nextBtn').addEventListener('click', next);
-
-    function updateMedia() {
-      // fade-out both, then show the target
-      videoElement.className = 'hidden';
-      imageElement.className = 'hidden';
-
-      if (currentIndex === 0) {
-        // Show video
-        videoElement.className = 'visible';
-      } else {
-        const nextSrc = `${basePath}${currentIndex}.png`;
-        const temp = new Image();
-        temp.onload = () => {
-          imageElement.src = nextSrc;
-          imageElement.alt = `${imageAltBase} ${currentIndex}`;
-          imageElement.className = 'visible';
-        };
-        temp.src = nextSrc;
-
-        // Pause the video when switching to images
-        if (!videoElement.paused) videoElement.pause();
-      }
-
-      // Preload ahead (images only)
-      if (currentIndex !== 0) {
-        for (let i = 1; i <= preloadAhead; i++) {
-          const idx = currentIndex + i > totalImages ? ((currentIndex + i - 1) % totalImages) + 1 : currentIndex + i;
-          const img = new Image(); img.decoding = 'async'; img.loading = 'lazy';
-          img.src = `${basePath}${idx}.png`;
-        }
-        const prevIdx = currentIndex - 1 <= 0 ? totalImages : currentIndex - 1;
-        const imgPrev = new Image(); imgPrev.decoding = 'async'; imgPrev.loading = 'lazy';
-        imgPrev.src = `${basePath}${prevIdx}.png`;
-      }
+    function updateImage() {
+      imageElement.src = `images/vtc-app/images/${currentIndex}.png`;
     }
 
-    function prev() {
-      currentIndex = currentIndex <= 0 ? totalImages : currentIndex - 1;
-      updateMedia();
+    function prevImage() {
+      currentIndex = currentIndex <= 1 ? totalImages : currentIndex - 1;
+      updateImage();
     }
-    function next() {
-      currentIndex = currentIndex >= totalImages ? 0 : currentIndex + 1;
-      updateMedia();
-    }
-    function goTo(n){ currentIndex = n; updateMedia(); } // retained if you add thumbnails later
 
-    // Init
-    updateMedia();
+    function nextImage() {
+      currentIndex = currentIndex >= totalImages ? 1 : currentIndex + 1;
+      updateImage();
+    }
   </script>
 
 </body>
