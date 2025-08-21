@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<li><a href="projects.html" class="active">Portfolio</a></li>
+</ul>
+</nav>
+</header>
+
+
+<!-- Project Content -->
+<div class="project-container">
+<div class="slider-wrapper">
+<img id="mainImage" src="images/ttwebsystem/images/1.png" alt="TTWebSystem screenshots" />
+<div class="nav-buttons">
+<button onclick="prevImage()"> &lt; </button>
+<button onclick="nextImage()"> &gt; </button>
+</div>
+</div>
+
+
+<div class="project-info">
+<h2>TTWebSystem — Recruitment & Admin Suite</h2>
+<p><strong>Category:</strong> Full Stack (TypeScript, Express/GraphQL, MySQL)</p>
+<p><strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener">link</a></p>
+
+
+<p>
+A multi-part system for tutor/lab assistant applications and administration. The student-facing app submits
+applications via REST to a MySQL backend. Lecturers use a dashboard to review candidates, assign ranks and
+statuses, leave comments, and generate reports. A separate Admin Dashboard (React + GraphQL) manages
+courses, lecturer-course assignments, candidate blocking, and real-time notifications via subscriptions.
+</p>
+
+
+<p>
+Designed with strong validation and role-based views to streamline hiring and reporting across the
+organisation.
+</p>
+
+
+<div class="tags">
+<span class="tag">TypeScript</span>
+<span class="tag">Express</span>
+<span class="tag">GraphQL</span>
+<span class="tag">MySQL</span>
+<span class="tag">TypeORM</span>
+<span class="tag">React</span>
+</div>
+</div>
+</div>
+
+
+<script>
+const totalImages = 14; // adjust to your image count
+let currentIndex = 1;
+const imageElement = document.getElementById('mainImage');
+
+
+function updateImage() {
+imageElement.src = `images/ttwebsystem/${currentIndex}.png`;
+}
+
+
+function prevImage() {
+currentIndex = currentIndex <= 1 ? totalImages : currentIndex - 1;
+updateImage();
+}
+
+
+function nextImage() {
+currentIndex = currentIndex >= totalImages ? 1 : currentIndex + 1;
+updateImage();
+}
+</script>
+
+
+</body>
+</html>

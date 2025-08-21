@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+</header>
+
+
+<!-- Project Content -->
+<div class="project-container">
+<div class="slider-wrapper">
+<img id="mainImage" src="images/burritoking/images/1.png" alt="BurritoKing App screenshots" />
+<div class="nav-buttons">
+<button onclick="prevImage()"> &lt; </button>
+<button onclick="nextImage()"> &gt; </button>
+</div>
+</div>
+
+
+<div class="project-info">
+<h2>BurritoKing — JavaFX Restaurant App</h2>
+<p><strong>Category:</strong> Desktop Ordering System (JavaFX + SQLite)</p>
+<p><strong>GitHub:</strong> <a href="#" target="_blank" rel="noopener">link</a></p>
+
+
+<p>
+A GUI ordering system built with Java + FXML and a SQLite backend (<code>BurritoKing.db</code>). Users can
+register/login, manage profiles, build a shopping basket, place orders with basic card validation, and
+export order history to CSV. Order lifecycle supports awaiting collection, collected, and cancelled states.
+</p>
+
+
+<p>
+VIP users receive a $3 meal discount and earn credits (100 credits = $1) with the option to redeem during
+checkout. Final paid price drives credits earned and is reflected across order views and collection flows.
+</p>
+
+
+<div class="tags">
+<span class="tag">Java</span>
+<span class="tag">JavaFX / FXML</span>
+<span class="tag">SQLite</span>
+<span class="tag">MVC</span>
+<span class="tag">CSV Export</span>
+</div>
+</div>
+</div>
+
+
+<script>
+const totalImages = 10; // adjust to your image count
+let currentIndex = 1;
+const imageElement = document.getElementById('mainImage');
+
+
+function updateImage() {
+imageElement.src = `images/burritoking/${currentIndex}.png`;
+}
+
+
+function prevImage() {
+currentIndex = currentIndex <= 1 ? totalImages : currentIndex - 1;
+updateImage();
+}
+
+
+function nextImage() {
+currentIndex = currentIndex >= totalImages ? 1 : currentIndex + 1;
+updateImage();
+}
+</script>
+
+
+</body>
+</html>
