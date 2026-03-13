@@ -1,4 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const skillBalanceContainers = document.querySelectorAll('[data-skill-balance]');
+
+  skillBalanceContainers.forEach((container) => {
+    if (container.dataset.skillBalanced === 'true') {
+      return;
+    }
+
+    const skills = Array.from(container.querySelectorAll(':scope > .skill'));
+    if (skills.length === 0) {
+      return;
+    }
+
+    const midpoint = Math.ceil(skills.length / 2);
+    const leftColumn = document.createElement('div');
+    const rightColumn = document.createElement('div');
+
+    leftColumn.className = 'skills-column';
+    rightColumn.className = 'skills-column';
+
+    skills.forEach((skill, index) => {
+      if (index < midpoint) {
+        leftColumn.appendChild(skill);
+      } else {
+        rightColumn.appendChild(skill);
+      }
+    });
+
+    container.replaceChildren(leftColumn, rightColumn);
+    container.dataset.skillBalanced = 'true';
+  });
+
   const sections = document.querySelectorAll('.section');
   const sectionObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -18,13 +49,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const skillSection = document.querySelector('.skills-grid, .skills-columns');
+  const skillSection = document.querySelector('.skills-grid, .skills-columns, .skills-balance');
   const skillFills = document.querySelectorAll('.bar-fill');
 
   function animateSkills() {
     skillFills.forEach((fill) => {
       const top = fill.getBoundingClientRect().top;
-      const isVisible = top < window.innerHeight - 100;
+      const isVisible = top < window.innerHeight;
 
       if (isVisible && !fill.classList.contains('visible')) {
         fill.classList.add('visible');
@@ -61,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (skillSection && skillFills.length > 0) {
     window.addEventListener('scroll', animateSkills);
     window.addEventListener('load', animateSkills);
+    animateSkills();
   }
 
   const resumeTabs = document.querySelectorAll('[data-resume-tab]');

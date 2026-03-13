@@ -150,7 +150,8 @@ p {
 }
 
 .skills-grid,
-.skills-columns {
+.skills-columns,
+.skills-balance {
   display: grid;
   gap: 1.2rem 2rem;
 }
@@ -160,6 +161,11 @@ p {
 }
 
 .skills-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.skills-balance {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: start;
 }
@@ -552,7 +558,8 @@ footer {
     max-width: 100%;
   }
 
-  .skills-columns {
+  .skills-columns,
+  .skills-balance {
     grid-template-columns: 1fr;
   }
 
