@@ -1,7 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Reveal sections with scroll
   const sections = document.querySelectorAll('.section');
-
   const sectionObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -13,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sections.forEach(section => sectionObserver.observe(section));
 
-  // Force reveal for visible sections on load
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
     if (rect.top < window.innerHeight && !section.classList.contains('visible')) {
@@ -21,8 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Animate skill bars on scroll with percentage counters
-  const skillSection = document.querySelector('.skills-grid');
+  const skillSection = document.querySelector('.skills-grid, .skills-columns');
   const skillFills = document.querySelectorAll('.bar-fill');
 
   function animateSkills() {
@@ -65,5 +61,30 @@ document.addEventListener('DOMContentLoaded', () => {
   if (skillSection && skillFills.length > 0) {
     window.addEventListener('scroll', animateSkills);
     window.addEventListener('load', animateSkills);
+  }
+
+  const resumeTabs = document.querySelectorAll('[data-resume-tab]');
+  const resumePanels = document.querySelectorAll('[data-resume-panel]');
+
+  if (resumeTabs.length > 0 && resumePanels.length > 0) {
+    const activateResumeTab = (target) => {
+      resumeTabs.forEach((tab) => {
+        const isActive = tab.dataset.resumeTab === target;
+        tab.classList.toggle('active', isActive);
+        tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      resumePanels.forEach((panel) => {
+        const isActive = panel.dataset.resumePanel === target;
+        panel.classList.toggle('active', isActive);
+        panel.hidden = !isActive;
+      });
+    };
+
+    resumeTabs.forEach((tab) => {
+      tab.addEventListener('click', () => activateResumeTab(tab.dataset.resumeTab));
+    });
+
+    activateResumeTab('work');
   }
 });

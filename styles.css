@@ -1,14 +1,11 @@
-/* Import Google Font for name */
 @import url('https://fonts.googleapis.com/css2?family=Carattere&family=Imperial+Script&display=swap');
 
-/* Base Reset */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* Typography and Layout */
 html, body {
   font-family: 'Roboto', sans-serif;
   background-color: #ffffff;
@@ -17,7 +14,6 @@ html, body {
   scroll-behavior: smooth;
 }
 
-/* Header / Hero */
 .hero {
   min-height: 100vh;
   display: flex;
@@ -26,21 +22,20 @@ html, body {
   align-items: center;
   padding: 4rem 2rem;
   text-align: center;
-  background-image: url('images/background.png'); /* Replace with your actual image path */
+  background-image: url('images/background.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  color: #000000; /* Ensure text is visible over image */
+  color: #000000;
 }
 
-
-/* Navigation Bar */
 .navbar {
   background-color: transparent;
   padding: 0;
   border: none;
   box-shadow: none;
 }
+
 .navbar ul {
   list-style: none;
   display: flex;
@@ -50,9 +45,11 @@ html, body {
   padding: 0;
   margin: 0;
 }
+
 .navbar li {
   margin: 0;
 }
+
 .navbar a {
   text-decoration: none;
   color: #555;
@@ -60,10 +57,12 @@ html, body {
   position: relative;
   transition: color 0.3s ease;
 }
+
 .navbar a:hover,
 .navbar a.active {
   color: #58585c;
 }
+
 .navbar a::after {
   content: "";
   position: absolute;
@@ -74,12 +73,12 @@ html, body {
   bottom: -4px;
   transition: width 0.3s ease;
 }
+
 .navbar a:hover::after,
 .navbar a.active::after {
   width: 100%;
 }
 
-/* Name Styling */
 .name-link {
   font-family: "Carattere", cursive;
   font-size: 4.5rem;
@@ -87,12 +86,12 @@ html, body {
   text-decoration: none;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
+
 .name-link:hover {
   color: #4b4b4e;
   text-shadow: 1px 1px 4px rgba(161, 190, 189, 0.25);
 }
 
-/* Buttons */
 .btn {
   display: inline-block;
   margin-top: 2rem;
@@ -105,12 +104,9 @@ html, body {
   font-weight: bold;
   font-size: 1rem;
   transition: background-color 0.3s ease;
-
   width: auto;
-  align-self: center; /* Aligns to the left inside a flex column */
+  align-self: center;
 }
-
-
 
 .btn:hover {
   background-color: #4d5356;
@@ -122,14 +118,12 @@ p {
   line-height: 1.6;
 }
 
-/* Container */
 .container {
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 2rem;
 }
 
-/* Section Reveal */
 .section {
   padding: 3rem 1.5rem;
   border-bottom: 1px solid #ddd;
@@ -137,44 +131,68 @@ p {
   transform: translateY(40px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
+
 .section.visible {
   opacity: 1;
   transform: translateY(0);
 }
+
 .section h2 {
   font-size: 2.2rem;
   margin-bottom: 0.75rem;
   padding-bottom: 0.3rem;
   border-bottom: 2px solid #58585c;
 }
+
 .section p {
   margin-bottom: 1.5rem;
   color: #555;
 }
 
-/* Skills Grid */
-.skills-grid {
+.skills-grid,
+.skills-columns {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 1.2rem 2rem;
 }
+
+.skills-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+
+.skills-columns {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+
+.skills-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
 .skill {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
 }
+
 .skill-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
 }
+
 .skill-row span.label {
   font-weight: 500;
 }
+
 .skill-row span.percent {
   font-size: 0.9rem;
   color: #444;
+  white-space: nowrap;
 }
+
 .bar {
   background-color: #ddd;
   height: 8px;
@@ -182,6 +200,7 @@ p {
   width: 100%;
   overflow: hidden;
 }
+
 .bar-fill {
   height: 100%;
   background-color: #58585c;
@@ -190,7 +209,6 @@ p {
   transition: width 1s ease;
 }
 
-/* Footer */
 footer {
   text-align: center;
   padding: 1.2rem;
@@ -200,13 +218,13 @@ footer {
   border-top: 1px solid #ddd;
 }
 
-/* Portfolio Grid */
 .portfolio-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
   padding-top: 1rem;
 }
+
 .project-card {
   position: relative;
   overflow: hidden;
@@ -218,14 +236,17 @@ footer {
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
+
 .project-card:hover {
   transform: scale(1.02);
 }
+
 .project-card img {
   width: 100%;
   height: auto;
   display: block;
 }
+
 .overlay {
   position: absolute;
   inset: 0;
@@ -236,50 +257,27 @@ footer {
   align-items: center;
   transition: opacity 0.3s ease;
 }
+
 .project-card:hover .overlay {
   opacity: 1;
 }
+
 .overlay-content {
   text-align: center;
   color: #fff;
 }
+
 .overlay-content h3 {
   font-size: 1.2rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
 }
+
 .overlay-content p {
   font-size: 0.9rem;
   opacity: 0.85;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .navbar ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-  }
-  .section h2 {
-    font-size: 1.5rem;
-  }
-  .name-link {
-    font-size: 2rem;
-  }
-  .about-me-flex {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .about-content {
-    text-align: left;
-  }
-  .about-image img {
-    max-width: 100%;
-  }
-}
-
-/* Topbar */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -292,6 +290,7 @@ footer {
   top: 0;
   z-index: 1000;
 }
+
 .logo a {
   font-family: 'Carattere', cursive;
   font-size: 2.5rem;
@@ -300,12 +299,12 @@ footer {
   text-decoration: none;
   transition: color 0.3s ease, text-shadow 0.3s ease;
 }
+
 .logo a:hover {
   color: #58585c;
   text-shadow: 1px 1px 4px rgba(75, 84, 84, 0.25);
 }
 
-/* Icons */
 .icon {
   width: 20px;
   height: 20px;
@@ -314,12 +313,12 @@ footer {
   transition: transform 0.2s ease, filter 0.2s ease;
 }
 
-/* Social Icons */
 .social-icons {
   display: flex;
   gap: 0.8rem;
   margin: 1.5rem 0;
 }
+
 .icon-circle {
   background-color: #222;
   border-radius: 50%;
@@ -330,36 +329,38 @@ footer {
   justify-content: center;
   transition: background-color 0.3s ease;
 }
+
 .icon-circle img {
   width: 20px;
   height: 20px;
 }
+
 .icon-circle.linkedin:hover,
 .icon-circle.github:hover {
   background-color: #4d5356;
 }
 
-/* Custom List */
 .custom-list {
   list-style: none;
   padding-left: 0;
   margin-top: 1rem;
 }
+
 .custom-list li {
   position: relative;
   padding-left: 1.8em;
   margin-bottom: 0.5em;
   font-size: 1rem;
 }
+
 .custom-list li::before {
-  content: '➤';
+  content: ">";
   position: absolute;
   left: 0;
   color: #363435;
   font-size: 1em;
 }
 
-/* About Section */
 .about-me-flex {
   display: flex;
   flex-wrap: wrap;
@@ -367,37 +368,137 @@ footer {
   gap: 2rem;
   margin-top: 2rem;
 }
+
 .about-image img {
   max-width: 300px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+
 .about-content {
   flex: 1;
   min-width: 280px;
 }
 
-/* Experience */
+.resume-page {
+  max-width: 1200px;
+}
+
+.resume-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: #6e6e73;
+  margin-bottom: 0.75rem;
+}
+
+.resume-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 2rem;
+  align-items: start;
+  margin-top: 2rem;
+}
+
+.resume-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.resume-tab-btn {
+  width: 100%;
+  border: 1px solid #d6dbe0;
+  background: #ffffff;
+  color: #222;
+  border-radius: 18px;
+  padding: 1.25rem 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+.resume-tab-btn.active {
+  background: #4d5356;
+  border-color: #4d5356;
+  color: #ffffff;
+}
+
+.resume-content {
+  background: #f7f8fa;
+  border: 1px solid #e0e4e8;
+  border-radius: 22px;
+  padding: 2rem;
+}
+
+.resume-panel h3 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.resume-panel[hidden] {
+  display: none;
+}
+
+.resume-card {
+  background: #ffffff;
+  border: 1px solid #e2e6ea;
+  border-radius: 18px;
+  padding: 1.5rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.04);
+}
+
+.resume-card:last-child {
+  margin-bottom: 0;
+}
+
+.resume-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.resume-card h4 {
+  font-size: 1.5rem;
+  color: #222;
+}
+
+.resume-period {
+  background: #e9eef1;
+  color: #3f4648;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.resume-company {
+  color: #4d5356;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.resume-card ul {
+  padding-left: 1.25rem;
+}
+
+.resume-card li {
+  margin-bottom: 0.65rem;
+}
+
 .section.container {
-  max-width: 960px;
+  max-width: 1100px;
   margin: auto;
   padding: 2rem;
 }
-.experience-content .item {
-  margin-bottom: 2rem;
-}
-.experience-content h3 {
-  margin-bottom: 0.25rem;
-  color: #333;
-}
-.experience-content ul {
-  padding-left: 1.5rem;
-  list-style: disc;
-}
 
-/* Actions */
 .actions {
-  display: block;  /* Or remove align-items: center */
+  display: block;
   margin-top: 2rem;
 }
 
@@ -405,4 +506,66 @@ footer {
   display: flex;
   justify-content: center;
   gap: 1rem;
+}
+
+@media (max-width: 900px) {
+  .resume-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .resume-tabs {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .resume-tab-btn {
+    flex: 1 1 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  .name-link {
+    font-size: 2rem;
+  }
+
+  .about-me-flex {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .about-content {
+    text-align: left;
+  }
+
+  .about-image img {
+    max-width: 100%;
+  }
+
+  .skills-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .topbar {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .resume-card-header {
+    flex-direction: column;
+  }
+
+  .resume-content {
+    padding: 1.25rem;
+  }
 }
