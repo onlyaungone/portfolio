@@ -9,6 +9,11 @@
 html, body {
   font-family: 'Roboto', sans-serif;
   background-color: #ffffff;
+  background-image: url('images/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   color: #222;
   line-height: 1.6;
   scroll-behavior: smooth;
@@ -289,7 +294,7 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #fff;
+  background-color: rgba(255, 255, 255, 0.92);
   border-bottom: 1px solid #e0e0e0;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
   position: sticky;
@@ -433,7 +438,7 @@ footer {
 }
 
 .resume-content {
-  background: #f7f8fa;
+  background: rgba(247, 248, 250, 0.94);
   border: 1px solid #e0e4e8;
   border-radius: 22px;
   padding: 2rem;
@@ -449,7 +454,7 @@ footer {
 }
 
 .resume-card {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.96);
   border: 1px solid #e2e6ea;
   border-radius: 18px;
   padding: 1.5rem;
