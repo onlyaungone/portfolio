@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Makro Myanmar App - Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background-image: url('images/background.png');
+      background-image: url('/images/background.png');
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -51,19 +51,19 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="logo"><a href="index.html" class="name-link">Aung Phone Myint</a></div>
+    <div class="logo"><a href="/" class="name-link">Aung Phone Myint</a></div>
     <nav class="navbar">
       <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="projects.html" class="active">Portfolio</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/resume">Resume</a></li>
+        <li><a href="/projects" class="active">Portfolio</a></li>
       </ul>
     </nav>
   </header>
 
   <div class="project-container">
     <div class="slider-wrapper">
-      <img id="mainImage" src="images/makro/1.png" alt="Makro Myanmar app screenshots" />
+      <img id="mainImage" src="/images/makro/1.png" alt="Makro Myanmar app screenshots" />
       <div class="nav-buttons">
         <button onclick="prevImage()"> &lt; </button>
         <button onclick="nextImage()"> &gt; </button>
@@ -105,7 +105,7 @@
     let currentIndex = 1;
     const imageElement = document.getElementById('mainImage');
 
-    function updateImage() { imageElement.src = `images/makro/${currentIndex}.png`; }
+    function updateImage() { imageElement.src = `/images/makro/${currentIndex}.png`; }
     function prevImage() { currentIndex = currentIndex <= 1 ? totalImages : currentIndex - 1; updateImage(); }
     function nextImage() { currentIndex = currentIndex >= totalImages ? 1 : currentIndex + 1; updateImage(); }
   </script>

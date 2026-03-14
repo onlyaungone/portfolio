@@ -3,30 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>City Rewards 2.0 - Project</title>
+  <title>BurritoKing App - Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background: url('images/background.png') center / cover no-repeat fixed;
-      color: #000;
+      background-image: url('/images/background.png'); /* adjust path if needed */
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #000000;
       margin: 0;
       padding: 0;
     }
 
-    /* Navbar */
+    /* === Navbar === */
     .topbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      background-color: #fff;
+      background-color: #ffffff;
     }
 
     .logo .name-link {
       font-size: 2.5rem;
-      color: #000;
+      color: #000000;
       text-decoration: none;
       font-weight: bold;
     }
@@ -40,17 +44,18 @@
     }
 
     .navbar a {
-      color: #000;
+      color: #000000;
       text-decoration: none;
       font-weight: 500;
-      transition: opacity 0.3s ease;
+      transition: color 0.3s ease;
     }
 
-    .navbar a:hover {
-      opacity: 0.7;
+    .navbar a:hover,
+    .navbar .active {
+      color: #000000;
     }
 
-    /* Project Section */
+    /* === Main Project Section === */
     .project-container {
       display: flex;
       flex-wrap: wrap;
@@ -62,6 +67,7 @@
 
     .slider-wrapper {
       flex: 1 1 600px;
+      position: relative;
       text-align: center;
     }
 
@@ -112,7 +118,7 @@
     }
 
     .project-info a {
-      color: #000;
+      color: #000000;
       text-decoration: underline;
     }
 
@@ -135,13 +141,19 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
       .navbar ul {
         flex-wrap: wrap;
         gap: 1rem;
       }
+
       .project-container {
         flex-direction: column;
         padding: 1rem;
+      }
+
+      .slider-wrapper img {
+        width: 100%;
       }
     }
   </style>
@@ -151,13 +163,13 @@
   <!-- Navbar -->
   <header class="topbar">
     <div class="logo">
-      <a href="index.html" class="name-link">Aung Phone Myint</a>
+      <a href="/" class="name-link">Aung Phone Myint</a>
     </div>
     <nav class="navbar">
       <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="projects.html" class="active">Portfolio</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/resume">Resume</a></li>
+        <li><a href="/projects" class="active">Portfolio</a></li>
       </ul>
     </nav>
   </header>
@@ -165,7 +177,8 @@
   <!-- Project Content -->
   <div class="project-container">
     <div class="slider-wrapper">
-      <img id="mainImage" src="images/cityrewards/1.png" alt="City Rewards 2.0 Screenshot" />
+      <!-- Match APM/VTC style: single <img> with Prev/Next -->
+      <img id="mainImage" src="/images/burritoking/1.png" alt="BurritoKing App screenshots" />
       <div class="nav-buttons">
         <button onclick="prevImage()"> &lt; </button>
         <button onclick="nextImage()"> &gt; </button>
@@ -173,43 +186,39 @@
     </div>
 
     <div class="project-info">
-      <h2>City Rewards 2.0</h2>
+      <h2>BurritoKing</h2>
+      <p><strong>Category:</strong> Desktop Ordering System</p>
+      <p><strong>GitHub:</strong> <a href="https://github.com/onlyaungone/burritokingapp" target="_blank" rel="noopener noreferrer">link</a></p>
 
-      <p><strong>Category:</strong> Loyalty Rewards Platform</p>
-      <p><strong>Links:</strong>
-        <a href="https://www.cityrewards.com.mm/" target="_blank" rel="noopener noreferrer">Website</a> |
-        <a href="https://play.google.com/store/apps/details?id=com.cityrewardsmobile&hl=en_AU" target="_blank" rel="noopener noreferrer">Google Play</a> |
-        <a href="https://apps.apple.com/sg/app/city-rewards-2-0/id1514330073" target="_blank" rel="noopener noreferrer">App Store</a>
+      <p>
+        A GUI ordering system built with Java + FXML and a SQLite backend (<code>BurritoKing.db</code>). Users can
+        register/login, manage profiles, build a shopping basket, place orders with basic card validation, and
+        export order history to CSV. Order lifecycle supports awaiting collection, collected, and cancelled states.
       </p>
 
       <p>
-        Contributed to the redevelopment of a large-scale rewards platform. Implemented scalable APIs for
-        point tracking, voucher redemption, and account management using Node.js with AWS services. Enhanced
-        the web experience with React, providing real-time point updates and a mobile-friendly UI.
-      </p>
-
-      <p>
-        Focused on secure authentication workflows, optimized database queries, and performance tuning to
-        improve response times under heavy load.
+        VIP users receive a $3 meal discount and earn credits (100 credits = $1) with the option to redeem during
+        checkout. Final paid price drives credits earned and is reflected across order views and collection flows.
       </p>
 
       <div class="tags">
-        <span class="tag">Node.js</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">AWS</span>
-        <span class="tag">React</span>
-        <span class="tag">REST APIs</span>
+        <span class="tag">Java</span>
+        <span class="tag">JavaFX / FXML</span>
+        <span class="tag">SQLite</span>
+        <span class="tag">MVC</span>
+        <span class="tag">CSV Export</span>
       </div>
     </div>
   </div>
 
   <script>
-    const totalImages = 4;
+    // Same slider behavior as project-vtc.html
+    const totalImages = 10; // adjust to your image count
     let currentIndex = 1;
     const imageElement = document.getElementById('mainImage');
 
     function updateImage() {
-      imageElement.src = `images/cityrewards/${currentIndex}.png`;
+      imageElement.src = `/images/burritoking/${currentIndex}.png`;
     }
 
     function prevImage() {

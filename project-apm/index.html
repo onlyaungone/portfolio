@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>APM Jewellery - Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="/styles.css" />
   <style>
     body {
       font-family: 'Roboto', sans-serif;
-      background-image: url('images/background.png'); /* adjust path if needed */
+      background-image: url('/images/background.png'); /* adjust path if needed */
       background-size: cover;
       background-repeat: no-repeat;
       background-attachment: fixed;
@@ -163,13 +163,13 @@
   <!-- Navbar -->
   <header class="topbar">
     <div class="logo">
-      <a href="index.html" class="name-link">Aung Phone Myint</a>
+      <a href="/" class="name-link">Aung Phone Myint</a>
     </div>
     <nav class="navbar">
       <ul>
-        <li><a href="about.html">About</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="projects.html" class="active">Portfolio</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/resume">Resume</a></li>
+        <li><a href="/projects" class="active">Portfolio</a></li>
       </ul>
     </nav>
   </header>
@@ -177,7 +177,7 @@
   <!-- Project Content -->
   <div class="project-container">
     <div class="slider-wrapper">
-      <img id="mainImage" src="images/apm-jewellery/1.png" alt="APM Jewellery Screenshot" />
+      <img id="mainImage" src="/images/apm-jewellery/1.png" alt="APM Jewellery Screenshot" />
       <div class="nav-buttons">
         <button onclick="prevImage()"> &lt; </button>
         <button onclick="nextImage()"> &gt; </button>
@@ -217,7 +217,7 @@
     const imageElement = document.getElementById('mainImage');
 
     function updateImage() {
-      imageElement.src = `images/apm-jewellery/${currentIndex}.png`;
+      imageElement.src = `/images/apm-jewellery/${currentIndex}.png`;
     }
 
     function prevImage() {
